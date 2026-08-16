@@ -68,6 +68,21 @@ header {
 .area-4 {
   grid-area: area-4;
 }
+.area-1:hover,
+.area-2:hover,
+.area-3:hover,
+.area-4:hover {
+  transition-duration: 0.8s;
+  background-color: var(--blue-400);
+  cursor: pointer;
+}
+.area-1:focus,
+.area-2:focus,
+.area-3:focus,
+.area-4:focus {
+  transition-duration: 0.8s;
+  background-color: var(--blue-400);
+}
 ul {
   list-style: none;
   padding: 0;
@@ -165,6 +180,16 @@ nav > a {
   font-size: 2rem;
   font-weight: 500;
 }
+nav.open > a:hover {
+  
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  
+}
+nav.open > a:focus {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
 
 @media (min-width: 768px) {
   #grid-container {
@@ -177,17 +202,17 @@ nav > a {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
-  nav{
+  nav {
     justify-content: flex-start;
     align-items: flex-end;
     gap: 1rem;
   }
-  nav > a{
+  nav > a {
     white-space: nowrap;
   }
   nav.open {
-    grid-column: 4 / 5; 
-    grid-row: 1 / 4; 
+    grid-column: 4 / 5;
+    grid-row: 1 / 4;
     animation: slideIn 1s ease forwards;
   }
 }
