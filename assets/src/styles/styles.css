@@ -1,6 +1,18 @@
 @import url("./colors.css");
 @import url("./fonts.css");
 
+/* Animación de aparicion del menu y overlay */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   background-color: var(--blue-600);
   color: var(--white);
@@ -10,19 +22,51 @@ body {
   margin: 0;
 }
 
+.overlay {
+  grid-column: 1 / -1; /* ocupa todas las columnas */
+  grid-row: 1 / -1; /* ocupa todas las filas */
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  pointer-events: none; /* opcional: para que no bloquee clics si no quieres */
+  display: none;
+}
+.overlay.open {
+  display: block;
+  animation: slideIn 1s ease forwards;
+}
+
 header {
   border-bottom: 1px solid var(--blue-400);
+  background-color: var(--blue-600);
   display: flex;
   justify-content: space-between;
   align-content: center;
   padding: 1.5rem;
 }
-#grid-app {
+#grid-container {
+  position: relative;
   display: grid;
-  grid-template-columns: 1;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas:
+    "hero-section"
+    "area-1"
+    "area-2"
+    "area-3"
+    "area-4"
+    "footer";
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+}
+.area-1 {
+  grid-area: area-1;
+}
+.area-2 {
+  grid-area: area-2;
+}
+.area-3 {
+  grid-area: area-3;
+}
+.area-4 {
+  grid-area: area-4;
 }
 ul {
   list-style: none;
@@ -45,6 +89,8 @@ li::before {
 }
 
 .grid-section {
+  position: relative;
+  z-index: 1;
   min-height: 266px;
   border: 1px solid var(--blue-400);
   padding: 1.5rem;
@@ -54,8 +100,15 @@ li::before {
 }
 /* Hero section */
 
-.section-under-menu {
+.hero-section {
+  grid-area: hero-section;
   display: flex;
+  position: relative;
+  z-index: 5;
+}
+
+.hidden {
+  display: none;
 }
 .grid-section > h1 {
   font-weight: 500;
@@ -82,6 +135,7 @@ li::before {
 }
 
 footer {
+  grid-area: footer;
   padding: 1.5rem;
   font-size: 14px;
   font-weight: 300;
@@ -89,12 +143,20 @@ footer {
 }
 
 nav {
-  grid-area: 1 / 1 / 2 / 2;
   display: none;
+  z-index: 10;
+  position: relative;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   padding: 2rem;
+  background-color: var(--blue-600);
+}
+
+nav.open {
+  display: flex;
+  grid-area: hero-section;
+  animation: slideIn 1s ease forwards;
 }
 nav > a {
   text-decoration: none;
