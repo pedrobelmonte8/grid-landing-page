@@ -132,6 +132,7 @@ li::before {
 .grid-section > .bottom-section > .additional-info {
   font-size: 14px;
   font-weight: 300;
+  line-height: 1rem;
 }
 
 footer {
@@ -163,4 +164,27 @@ nav > a {
   color: var(--white);
   font-size: 2rem;
   font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  #grid-container {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr auto;
+    grid-template-areas:
+      "hero-section hero-section area-1 area-2"
+      "hero-section hero-section area-3 area-4"
+      "footer footer footer footer";
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+  nav{
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  nav.open {
+    grid-column: 4 / 5; 
+    grid-row: 1 / 4; 
+    animation: slideIn 1s ease forwards;
+  }
 }
